@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+    /* ============= Typography ============= */
+    --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+    --font-display: "Instrument Serif", Georgia, serif;
+    --font-label: "Manrope", system-ui, sans-serif;
+
+    /* ============= Brand ============= */
+    --color-primary: #00236f;
+    --color-primary-container: #1e3a8a;
+    --color-secondary: #0047b3;
+    --color-tertiary: #0d0097;
+
+    /* ============= Surfaces (layered, no-border design) ============= */
+    --color-surface: #f6fafe;
+    --color-surface-container-low: #eef3f9;
+    --color-surface-container: #e7edf3;
+    --color-surface-container-high: #fafcfe;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-dim: #d9e1eb;
+
+    /* ============= Text (on-surface logic, not pure black) ============= */
+    --color-on-surface: #171c1f;
+    --color-on-surface-variant: #4a4d52;
+    --color-on-surface-muted: #7a7d82;
+    --color-on-primary: #ffffff;
+}
