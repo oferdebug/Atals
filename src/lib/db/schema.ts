@@ -67,3 +67,18 @@ export const users=pgTable('users',
     },
     (t) => ({ emailIdx: index("users_email_idx").on(t.email) })
 );
+
+export const candidateProfiles=pgTable('candidate_profiles',{
+    id:uuid('id').primaryKey().defaultRandom(),
+    userId:uuid('user_id').notNull().unique().references(()=>users.id,{onDelete:'cascade'}),
+
+
+    fullName:varchar('full_name',{length:200}).notNull(),
+    headline:varchar('headline',{length:300}),
+    location:varchar('location',{length:200}),
+    remotePreference:remotePreferenceEnum('remote_preference'),
+
+    salaryExpectationMin:integer('salary_expectation_min'),
+    salaryExpectationMax:integer('salary_expectation_max'),
+    experience:integer('experience_years'),
+})
