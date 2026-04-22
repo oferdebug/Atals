@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
     return (
@@ -12,6 +14,18 @@ export default function Home() {
                 <p className={'font-sans text-lg opacity-80'}>
                     Fourteen elite roles, hand-picked for you.
                 </p>
+                <div className="flex items-center justify-center gap-3 pt-4">
+                    <Button className={'bg-white text-primary hover:bg-white/90 active:bg-white/80 focus-visible:ring-primary/50'}>
+                        <Link href={'/signup'}>Get Started</Link>
+                    </Button>
+                    <Button
+                        asChild
+                        variant="ghost"
+                        className="text-white hover:bg-white/10 hover:text-white"
+                    >
+                        <Link href={'/login'}>Log In</Link>
+                    </Button>
+                </div>
             </div>
         </main>
     );

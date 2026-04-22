@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, Manrope } from "next/font/google";
+import { Inter, Instrument_Serif, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +35,7 @@ export default function RootLayout({
   return (
       <html
           lang="en"
-          className={`${inter.variable} ${instrumentSerif.variable} ${manrope.variable}`}
+          className={cn(inter.variable, instrumentSerif.variable, manrope.variable, "font-mono", jetbrainsMono.variable)}
       >
       <body className={'bg-primary text-white'}>{children}</body>
       </html>
