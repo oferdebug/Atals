@@ -15,6 +15,12 @@ export const auth = betterAuth({
         enabled: true,
         minPasswordLength: 8,
     },
+    socialProviders: {
+        google: {
+            clientId:process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret:process.env.GOOGLE_CLIENT_SECRET as string,
+        },
+    },
     session: {
         expiresIn: 60 * 60 * 24 * 7,
         updateAge: 60 * 60 * 24,
@@ -31,4 +37,3 @@ export const auth = betterAuth({
     },
 });
 
-console.log("[auth init] auth object created, handler type:", typeof auth.handler);

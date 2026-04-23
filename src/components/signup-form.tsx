@@ -18,8 +18,10 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { GoogleSignInButton } from "@/components/google-signin-button";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
@@ -117,19 +119,19 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               />
             </Field>
             {error && <FieldError errors={[{ message: error }]} />}
-            <FieldGroup>
-              <Field>
-                <Button type="submit" disabled={isPending}>
-                  {isPending ? "Creating account..." : "Create Account"}
-                </Button>
-                <FieldDescription className="px-6 text-center">
-                  Already have an account?{" "}
-                  <Link href="/login" className="underline underline-offset-4">
-                    Sign in
-                  </Link>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
+            <Field>
+              <Button type="submit" disabled={isPending}>
+                {isPending ? "Creating account..." : "Create Account"}
+              </Button>
+            </Field>
+            <FieldSeparator>Or continue with</FieldSeparator>
+            <GoogleSignInButton />
+            <FieldDescription className="px-6 text-center">
+              Already have an account?{" "}
+              <Link href="/login" className="underline underline-offset-4">
+                Sign in
+              </Link>
+            </FieldDescription>
           </FieldGroup>
         </form>
       </CardContent>

@@ -21,6 +21,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { GoogleSignInButton } from "./google-signin-button";
 
 export function LoginForm({
   className,
@@ -91,6 +92,7 @@ export function LoginForm({
                 <Button type="submit" disabled={isPending}>
                   {isPending ? "Signing in..." : "Login"}
                 </Button>
+                <GoogleSignInButton />
                 <FieldDescription className="text-center">
                   Don&apos;t have an account?{" "}
                   <Link href="/signup" className="underline underline-offset-4">
