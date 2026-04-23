@@ -22,12 +22,14 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { GoogleSignInButton } from "@/components/google-signin-button";
-
+import { LoaderCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const editorialInputClasses='h-12 border-0 border-b border-white/30 rounded-none bg-transparent px-0 text-base placeholder:text-white/30 focus-visible:ring-0';
+  const editorialButtonClasses='bg-white text-primary hover:bg-white/90 active:bg-white/80';
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
@@ -60,14 +62,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   }
 
   return (
-    <Card {...props}>
-      <CardHeader>
-        <CardTitle>Create an account</CardTitle>
-        <CardDescription>
-          Enter your information below to create your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+    <div className={'w-full space-y-10'}>
+      <div className={'space-y-4'}>
+        <p className={'font-label text-xs tracking-[0.22em] uppercase opacity-75 text-center'}>
+          Join Us Today
+          </p>
+          <h1 className={'font-display text-6xl italic leading-[1.1] text-center'}>
+            Find Your <em className={'not italic font-sans font-black'}>Dream Job Matches</em>
+          </h1>
+          <p className={'font-sans text-lg opacity-80 text-center'}>
+            Create an account to get started
+          </p>
         <form onSubmit={onSubmit}>
           <FieldGroup>
             <Field>
@@ -79,6 +84,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 placeholder="John Doe"
                 autoComplete="name"
                 required
+                className={editorialInputClasses}
               />
             </Field>
             <Field>
@@ -90,6 +96,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 placeholder="[email protected]"
                 autoComplete="email"
                 required
+                className={editorialInputClasses}
               />
             </Field>
             <Field>
@@ -101,6 +108,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 autoComplete="new-password"
                 minLength={8}
                 required
+                className={editorialInputClasses}
               />
               <FieldDescription>
                 Must be at least 8 characters long.
@@ -116,11 +124,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 type="password"
                 autoComplete="new-password"
                 required
+                className={editorialInputClasses}
               />
             </Field>
             {error && <FieldError errors={[{ message: error }]} />}
             <Field>
-              <Button type="submit" disabled={isPending}>
+              <Button type="submit" disabled={isPending} className={cn(editorialButtonClasses, 'w-full')}>
+                {isPending && <LoaderCircle className={'size-4 animate-spin'} />}
                 {isPending ? "Creating account..." : "Create Account"}
               </Button>
             </Field>
@@ -134,7 +144,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             </FieldDescription>
           </FieldGroup>
         </form>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

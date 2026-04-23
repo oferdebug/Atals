@@ -22,7 +22,7 @@ export function GoogleSignInButton() {
       variant="outline"
       onClick={handleClick}
       disabled={isPending}
-      className="w-full"
+      className="w-full bg-transparent text-white border-white/30 hover:bg-white hover:text-primary"
     >
       {isPending ? "Redirecting..." : "Continue with Google"}
     </Button>

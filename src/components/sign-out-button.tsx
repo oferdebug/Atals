@@ -18,8 +18,12 @@ export function SignOutButton() {
   }
 
   return (
-    <Button variant="outline" onClick={handleSignOut}>
-      Sign out
+<Button
+  variant="outline"
+  onClick={handleSignOut}
+  className="bg-transparent text-white border-white/30 hover:bg-white hover:text-primary"
+>
+        Sign out
     </Button>
   );
 }
