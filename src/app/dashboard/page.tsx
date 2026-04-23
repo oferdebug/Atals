@@ -28,9 +28,6 @@ export default async function DashboardPage() {
                         Role: <span className="font-mono">{(session.user as { role?: string }).role ?? "candidate"}</span>
                     </p>
                     </div>
-                <p className={'font-sans text-sm opacity-80'}>
-                    Role: <span className="font-mono">{(session.user as { role?: string }).role ?? "candidate"}</span>
-                </p>
                 <SignOutButton />
             </div>
         </div>
