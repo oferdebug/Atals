@@ -42,3 +42,7 @@ next-env.d.ts
 
 #ideas
 .idea/
+
+# Binaries that shouldn't be committed
+/biome.json
+/biome
