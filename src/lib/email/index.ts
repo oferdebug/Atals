@@ -1,11 +1,19 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { render } from '@react-email/components';
 import { createElement } from 'react';
 import { PasswordResetEmail } from '@/emails/password-reset';
 import { VerifyEmail } from '@/emails/verify-email';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev';
+const transporter = nodemailer.createTransport({
+	host: process.env.MAILTRAP_HOST,
+	port: Number(process.env.MAILTRAP_PORT),
+	auth: {
+		user: process.env.MAILTRAP_USER,
+		pass: process.env.MAILTRAP_PASS,
+	},
+});
+
+const FROM = process.env.MAILTRAP_FROM_EMAIL ?? 'noreply@atals.dev';
 
 export async function sendPasswordResetEmail({
 	to,
@@ -20,19 +28,18 @@ export async function sendPasswordResetEmail({
 		createElement(PasswordResetEmail, { userName, resetUrl }),
 	);
 
-	const { data, error } = await resend.emails.send({
-		from: `Atals <${FROM}>`,
-		to,
-		subject: 'Your Atals Password Reset Link',
-		html,
-	});
-
-	if (error) {
+	try {
+		const info = await transporter.sendMail({
+			from: `Atals <${FROM}>`,
+			to,
+			subject: 'Reset your Atals password',
+			html,
+		});
+		return info;
+	} catch (error) {
 		console.error('Failed to send password reset email:', error);
 		return null;
 	}
-
-	return data;
 }
 
 export async function sendVerificationEmail({
@@ -48,17 +55,16 @@ export async function sendVerificationEmail({
 		createElement(VerifyEmail, { userName, verifyUrl }),
 	);
 
-	const { data, error } = await resend.emails.send({
-		from: `Atals <${FROM}>`,
-		to,
-		subject: 'Verify your Atals email',
-		html,
-	});
-
-	if (error) {
+	try {
+		const info = await transporter.sendMail({
+			from: `Atals <${FROM}>`,
+			to,
+			subject: 'Verify your Atals email',
+			html,
+		});
+		return info;
+	} catch (error) {
 		console.error('Failed to send verification email:', error);
 		return null;
 	}
-
-	return data;
 }
